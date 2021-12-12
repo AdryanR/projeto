@@ -404,7 +404,7 @@ export default {
         storage.getDownloadURL().then((res) => console.log(res));
       }, 3000);
     },
-    addUsuario() {
+    addUsuario() { 
       axios
         .post("http://localhost:8090/usuario/newusuario", this.requisicao)
         .then((response) => {
