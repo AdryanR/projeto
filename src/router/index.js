@@ -26,10 +26,11 @@ const routes = [
     component: () => import('../views/Conta.vue')
   },
   {
-    path: '/causa',
+    path: '/causa/:causa',
     name: 'Causa',
     component: () => import('../views/Causa.vue')
   },
+  
   {
     path: '/nossas-causas/:categoria',
     name: 'Nossas Causas',

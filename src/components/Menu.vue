@@ -3,13 +3,10 @@
       <a class="navbar-brand" href="#">
         <router-link class="navbar-brand" to="/#">
           <img
-            src="https://img.icons8.com/fluency/48/000000/logo.png"
-            width="30"
-            height="30"
+            src="../assets/logo.png"
             class="d-inline-block align-top"
             alt=""
           />
-          Bootstrap
         </router-link>
       </a>
 

@@ -5,217 +5,114 @@
     </div>
     <div
       class="row login_box"
-      style="
-        background-image: url('http://www.cri-acao.com/wp-content/uploads/2017/08/banner-2.jpg');
-      "
+      :style="'background-image: url(' + causa.banner + ')'"
     >
       <div class="col-md-12 col-xs-12" align="center">
         <div class="outter">
-          <img
-            src="https://s3-sa-east-1.amazonaws.com/projetos-artes/fullsize%2F2016%2F03%2F15%2F22%2FLogo-182204_115798_222951152_207483801.jpg"
-            class="image-circle"
-          />
+          <img :src="causa.logo" class="image-circle" />
         </div>
       </div>
     </div>
     <div class="container-fluid">
       <div class="container overflow-hidden">
         <div class="container">
-          <h2 style="color: #125c13">NomeEntidade</h2>
-          <a>Blumenau/SC</a>
+          <h2 style="color: #125c13">{{ causa.nome.toUpperCase() }}</h2>
+          <a>{{ causa.cidade }}/{{ causa.estado }}</a>
           <div class="d-flex justify-content-center align-items-center">
             <div class="p-2">
-              <i class="fab fa-facebook fa-sm"></i>
+              <a
+                :href="causa.facebook"
+                target="_blank"
+                class="fab fa-facebook fa-sm"
+                style="text-decoration: none; color: black"
+              ></a>
             </div>
             <div class="p-2">
-              <i class="fab fa-instagram fa-sm"></i>
+              <a
+                :href="causa.instagram"
+                target="_blank"
+                class="fab fa-instagram fa-sm"
+                style="text-decoration: none; color: black"
+              ></a>
             </div>
             <div class="p-2">
-              <i class="fab fa-whatsapp fa-sm"></i>
+              <a
+                :href="causa.whatsapp"
+                target="_blank"
+                class="fab fa-whatsapp fa-sm"
+                style="text-decoration: none; color: black"
+              ></a>
             </div>
             <div class="p-2">
-              <i class="fab fa-linkedin fa-sm"></i>
+              <a
+                :href="causa.linkedin"
+                target="_blank"
+                class="fab fa-linkedin fa-sm"
+                style="text-decoration: none; color: black"
+              ></a>
             </div>
             <div class="p-2">
-              <i class="fas fa-map-marker-alt fa-sm"></i>
+              <a
+                href="mapa"
+                target="_blank"
+                class="fas fa-map-marker-alt fa-sm"
+                style="text-decoration: none; color: black"
+              ></a>
             </div>
           </div>
           <br />
-          <h4 class="titulo">QUEM SOMOS</h4><br>
-          <a>
-            Criado em 2018, o INSTITUTO RESGATANDO VIDAS é um dos projetos mais
-            bem estruturados da Zona Norte de São Paulo. Com foco em atender as
-            comunidades do bairro Vila Nova Cachoeirinha ZN de São Paulo e
-            arredores, o Instituto vem realizando uma transformação social na
-            região através de seus trabalhos focados em 4 pilares:<br />
-            <br />• Oficinas culturais : dança, teatro, pintura e canto e coral
-            <br />
-            <br />• Oficinas esportivas: Jiu Jitsu, futebol e basquete
-            <br />
-            <br />• Cursos de formação profissional <br />
-            <br />• Formação Socio Emocional: Focado no mercado de trabalho
-            Queremos mostrar aos jovens que, através da educação, é possível
-            sonhar mais, transformando um vendedor de drogas em um vendedor de
-            carros, um gerente do tráfico em um gerente de banco, um traficante
-            de drogas em um empreendedor social, ampliando os limites daqueles
-            que acreditam não ser possível vencer fora do crime, esse é o
-            propósito do Instituto Resgatando Vidas.</a
+          <h4 class="titulo">QUEM SOMOS</h4>
+          <br />
+          <a> {{ causa.descricao }}</a
           ><br /><br />
           <hr />
           <br />
-          <h4 class="titulo">PRECISAMOS DE</h4><br>
-          <a>
-            • 20kg de arroz por mês<br />
-            • 10l de alcool em Gel<br />
-            • Roupas para adultos<br />
-            • Ajuda possível em dinheiro </a
-          ><br /><br />
+          <h4 class="titulo">PRECISAMOS DE</h4>
+          <br />
+          <a> {{ causa.pedidodesc }} </a><br /><br />
           <hr />
           <br />
-          <h4 class="titulo">INFORMAÇÕES</h4><br>
+          <h4 class="titulo">INFORMAÇÕES</h4>
+          <br />
           <div class="row">
             <div class="col-md-6 p-2">
               <i
                 class="fas fa-map-marker-alt fa-sm"
                 style="vertical-align: middle"
               ></i
-              ><a>R. Engenheiro Paul Werner, 638, Itoupava Seca, Blumenau/SC</a>
+              ><a
+                >{{ causa.rua }}, {{ causa.numero }}, {{ causa.bairro }},
+                {{ causa.cidade }}/{{ causa.estado }}</a
+              >
             </div>
             <div class="col-md-6 p-2">
               <i
                 class="fas fa-phone-alt fa-sm"
                 style="vertical-align: middle"
               ></i
-              ><a>(47) 3433-3014</a>
+              ><a>{{ causa.telefone }}</a>
             </div>
             <div class="col-md-6 p-2">
               <i
                 class="fas fa-envelope fa-sm"
                 style="vertical-align: middle"
               ></i
-              ><a>entidadexyte@doemais.com.br</a>
+              ><a>{{ causa.email }}</a>
             </div>
             <div class="col-md-6 p-2">
               <i class="fas fa-id-card fa-sm" style="vertical-align: middle"></i
-              ><a>66.208.656/0001-02</a>
+              ><a>{{ causa.cnpj }}</a>
             </div>
           </div>
           <br />
           <hr />
           <br />
-          <h4 class="titulo">GALERIA</h4><br>
+          <h4 class="titulo">FOTO INSTITUCIONAL</h4>
           <br />
-          <div class="row">
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-              <a
-                href="https://images.pexels.com/photos/62307/air-bubbles-diving-underwater-blow-62307.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
-                class="fancybox"
-                rel="ligthbox"
-              >
-                <img
-                  src="https://images.pexels.com/photos/62307/air-bubbles-diving-underwater-blow-62307.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
-                  class="zoom img-fluid"
-                  alt=""
-                />
-              </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-              <a
-                href="https://images.pexels.com/photos/38238/maldives-ile-beach-sun-38238.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
-                class="fancybox"
-                rel="ligthbox"
-              >
-                <img
-                  src="https://images.pexels.com/photos/38238/maldives-ile-beach-sun-38238.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
-                  class="zoom img-fluid"
-                  alt=""
-                />
-              </a>
-            </div>
-
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-              <a
-                href="https://images.pexels.com/photos/158827/field-corn-air-frisch-158827.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                class="fancybox"
-                rel="ligthbox"
-              >
-                <img
-                  src="https://images.pexels.com/photos/158827/field-corn-air-frisch-158827.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                  class="zoom img-fluid"
-                  alt=""
-                />
-              </a>
-            </div>
-
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-              <a
-                href="https://images.pexels.com/photos/302804/pexels-photo-302804.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                class="fancybox"
-                rel="ligthbox"
-              >
-                <img
-                  src="https://images.pexels.com/photos/302804/pexels-photo-302804.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                  class="zoom img-fluid"
-                  alt=""
-                />
-              </a>
-            </div>
-
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-              <a
-                href="https://images.pexels.com/photos/1038914/pexels-photo-1038914.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
-                class="fancybox"
-                rel="ligthbox"
-              >
-                <img
-                  src="https://images.pexels.com/photos/1038914/pexels-photo-1038914.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
-                  class="zoom img-fluid"
-                  alt=""
-                />
-              </a>
-            </div>
-
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-              <a
-                href="https://images.pexels.com/photos/414645/pexels-photo-414645.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
-                class="fancybox"
-                rel="ligthbox"
-              >
-                <img
-                  src="https://images.pexels.com/photos/414645/pexels-photo-414645.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
-                  class="zoom img-fluid"
-                  alt=""
-                />
-              </a>
-            </div>
-
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-              <a
-                href="https://images.pexels.com/photos/56005/fiji-beach-sand-palm-trees-56005.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                class="fancybox"
-                rel="ligthbox"
-              >
-                <img
-                  src="https://images.pexels.com/photos/56005/fiji-beach-sand-palm-trees-56005.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                  class="zoom img-fluid"
-                  alt=""
-                />
-              </a>
-            </div>
-
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-              <a
-                href="https://images.pexels.com/photos/1038002/pexels-photo-1038002.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                class="fancybox"
-                rel="ligthbox"
-              >
-                <img
-                  src="https://images.pexels.com/photos/1038002/pexels-photo-1038002.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                  class="zoom img-fluid"
-                  alt=""
-                />
-              </a>
-            </div>
+          <div align="center" v-for="f in causa.userfoto" v-bind:key="f.id">
+            <img
+              :src="f.foto"
+              style="height: 500px; :800px ">
           </div>
         </div>
       </div>
@@ -229,22 +126,92 @@
 <script>
 import Menu from "@/components/Menu.vue";
 import Rodape from "@/components/Rodape.vue";
+import axios from "axios";
 export default {
   data() {
-    return {};
+    return {
+      causa: {
+        nome: "",
+        cnpj: "",
+        email: "",
+        senha: "",
+        cep: "",
+        bairro: "",
+        numero: "",
+        cidade: "",
+        estado: "",
+        complemento: "",
+        referencia: "",
+        logo: "",
+        banner: "",
+        fotoDestaque: "",
+        facebook: "",
+        instagram: "",
+        linkedin: "",
+        telefone: "",
+        whatsapp: "",
+        descricao: "",
+        pedidodesc: "",
+        userfoto: [
+          {
+            foto: "",
+          },
+        ],
+      },
+    };
   },
   components: {
     Menu,
     Rodape,
   },
+  methods: {
+    CarregaCausa: function (causa) {
+      axios
+        //   .get(`http://localhost:8090/usuario/${causa}`)
+        .get(`http://localhost:8090/usuario/userbyname/${causa}`)
+        .then((response) => {
+          var data = response.data[0];
+          if (data != null && data.id != null) {
+            this.causa.nome = data.nome;
+            this.causa.cnpj = data.cnpj;
+            this.causa.email = data.email;
+            this.causa.facebook = data.facebook;
+            this.causa.instagram = data.instagram;
+            this.causa.whatsapp = data.whatsapp;
+            this.causa.linkedin = data.linkedin;
+            this.causa.telefone = data.telefone;
+            this.causa.cep = data.cep;
+            this.causa.rua = data.rua;
+            this.causa.numero = data.numero;
+            this.causa.bairro = data.bairro;
+            this.causa.cidade = data.cidade;
+            this.causa.estado = data.estado;
+            this.causa.complemento = data.complemento;
+            this.causa.referencia = data.referencia;
+            this.causa.banner = data.banner;
+            this.causa.logo = data.logo;
+            this.causa.fotoDestaque = data.fotoDestaque;
+            data.userfoto.map((f) =>
+              this.causa.userfoto.push({
+                foto: f.foto,
+              })
+            );
+            this.causa.descricao = data.descricao;
+            this.causa.pedidodesc = data.pedidodesc;
+          }
+        });
+    },
+  },
+  mounted() {
+    this.CarregaCausa(this.$route.params.causa);
+  },
 };
 </script>
 
 <style scoped>
-
 .titulo {
-    color: #125c13;
-    font-weight: 700;
+  color: #125c13;
+  font-weight: 700;
 }
 
 .thumb {

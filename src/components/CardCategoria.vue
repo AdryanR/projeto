@@ -1,9 +1,9 @@
 <template>
   <div class="col-4">
-    <router-link style="text-decoration: none; color: #0B4619;" :to="link">
+    <router-link style="text-decoration: none; color: #0B4619;" :to="{name: 'Nossas Causas', params:{categoria:link}}">
       <div class="card text-center">
         <div class="p-2">
-          <h6 class="card-title">{{ categoria }}</h6>
+          <h6 class="card-title">{{ categoria.toUpperCase() }}</h6>
           <h2><i :class="icone"></i></h2>
         </div>
       </div>
@@ -36,17 +36,5 @@ export default {
 .card:hover {
   background: #6cc98177;
 }
-p {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-}
-/* @media screen and (max-width: 600px) {
-  .card-text {
-    visibility: hidden;
-  } 
 
-} */
 </style>

@@ -49,22 +49,22 @@
     </header>
     <div class="container-fluid">
       <div class="categorias">
-        <h2 class="titulo">ENCONTRE UMA CAUSA</h2>
+        <h2 class="titulo">NOSSAS CAUSAS</h2>
         <div class="subtitle">
           <a>Localize uma Instituição e faça sua doação</a>
         </div>
         <br />
         <div class="container overflow-hidden">
-          <a v-for="cat in categorias" :key="cat.id">
-            <div class="row">
-              <CardCategoria
-                :categoria="cat.nome"
-                :icone="cat.icone"
-                link="causa/"
-              />
-            </div>
-          </a>
-        </div>
+          <div class="row">
+            <CardCategoria
+              v-for="cat in categorias"
+              :key="cat.id"
+              :categoria="cat.nome"
+              :icone="cat.icone"
+              :link="cat.nome"
+            />
+          </div>
+        </div> 
       </div>
     </div>
     <div class="causaDestaque">
@@ -118,28 +118,12 @@
         <br />
         <div class="row">
           <CardAnuncio
-            imagem="https://www.bsocial.com.br/uploads/ongs/listagem-42.jpg"
-            titulo="INSTITUTO VITA"
-            texto="Temos por missão promover a saúde do atleta de alta performance e em desenvolvimento..."
-            link="causa/"
-          />
-          <CardAnuncio
-            imagem="https://www.bsocial.com.br/uploads/ongs/listagem-46.jpg"
-            titulo="INAPE"
-            texto="Tem a proposta de acolher crianças e adolescentes com deficiência intelectual e/ou dificuldades de aprendizagem..."
-            link="causa/"
-          />
-          <CardAnuncio
-            imagem="https://www.bsocial.com.br/uploads/ongs/listagem-ensinabrasil.jpg"
-            titulo="ENSINA BRASIL"
-            texto="O Ensina Brasil visa mobilizar mais talentos e desenvolver lideranças para transformar a educação..."
-            link="causa/"
-          />
-          <CardAnuncio
-            imagem="https://www.bsocial.com.br/uploads/ongs/listagem-ensinabrasil.jpg"
-            titulo="ENSINA BRASIL"
-            texto="O Ensina Brasil visa mobilizar mais talentos e desenvolver lideranças para transformar a educação..."
-            link="causa/"
+            v-for="user in usuarios"
+            :key="user.id"
+            :titulo="user.nome"
+            :imagem="user.fotoDestaque"
+            :texto="user.descricao"
+             :link="user.nome"
           />
         </div>
       </div>
@@ -163,6 +147,7 @@ export default {
       slide: 0,
       sliding: null,
       categorias: [],
+      usuarios: [],
     };
   },
   components: {
@@ -188,10 +173,33 @@ export default {
           alert("Algo deu errado ao carregar as categorias!");
         });
     },
+    ListaUsuarios() {
+      axios
+        .get(`http://localhost:8090/usuario/allusuario`)
+        .then((response) => {
+          this.usuarios = response.data;
+        })
+        .catch(() => {
+          alert("Algo deu errado ao carregar as causas!");
+        });
+    },
+    CarregaCausaDestaque() {
+      var id = Math.floor(Math.random() * 10);
+      axios
+        .get(`http://localhost:8090/usuario/${id}`)
+        .then((response) => {
+          this.usuarios = response.data;
+        })
+        .catch(() => {
+          alert("Algo deu errado ao carregar as causas!");
+        });
+    },
   },
   mounted() {
     this.ListaCategorias();
+    this.ListaUsuarios();
   },
+  beforeCreate() {},
 };
 </script>
 
