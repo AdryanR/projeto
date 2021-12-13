@@ -1,10 +1,11 @@
 <template>
-  <div class="causa">
-    <div class="menu">
+  <div id="causa" class="causa">
+    <div id="menu" class="menu">
       <Menu />
     </div>
     <div
       class="row login_box"
+      id="banner"
       :style="'background-image: url(' + causa.banner + ')'"
     >
       <div class="col-md-12 col-xs-12" align="center">

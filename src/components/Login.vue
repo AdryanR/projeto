@@ -37,13 +37,13 @@
               </div>
               <h3>Insira seus dados</h3>
               <br />
-              <form>
+              <form v-if="contaLogin" @submit.prevent="VerificaLogin">
                 <div class="form-group">
                   <input
                     type="text"
                     class="form-control"
                     placeholder="informe seu e-mail"
-                    value=""
+                    v-model="contaLogin.email"
                   />
                 </div>
                 <div class="form-group">
@@ -51,13 +51,11 @@
                     type="password"
                     class="form-control"
                     placeholder="informe sua senha"
-                    value=""
+                    v-model="contaLogin.senha"
                   />
                 </div>
                 <div class="form-group">
-                  <button type="button" class="btn btn-outline-success btn-lg px-4 me-md-2 fw-bold">
-                    Login
-                  </button>
+                  <input class="btn btn-primary" type="submit" @click="scrollToTop()" value="Login" />
                 </div>
                 <div class="form-group">
                   <a
@@ -76,12 +74,17 @@
   </div>
 </template>
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
       name: "Login",
       active: false,
       show: false,
+      contaLogin: {
+        email: "",
+        senha: "",
+      },
     };
   },
   methods: {
@@ -93,6 +96,35 @@ export default {
         : body.classList.remove("modal-open");
       setTimeout(() => (this.show = !this.show), 10);
     },
+    VerificaLogin() {
+      axios
+        .get(
+          `http://localhost:8090/usuario/login?email=${this.contaLogin.email}&senha=${this.contaLogin.senha}`
+        )
+        .then(
+          function (response) {
+            if (response.data.id != null) {
+              // this.$router.push('/conta')
+              this.$router.push({
+                name: "Conta",
+                params: {
+                  idUsuario: response.data.id
+                },
+              });
+
+            } else {
+              alert("Verifique seu e-mail ou senha!");
+              console.log("foi nao");
+            }
+          }.bind(this)
+        )
+        .catch(function (error) {
+          console.log(error.statusText);
+        });
+    },
+    scrollToTop() {
+            window.scrollTo(0, 0);
+        },
   },
 };
 </script>
@@ -114,8 +146,7 @@ export default {
 .btn-success:hover {
   background-color: #4a941cdc;
   color: #fff;
- border: 3px solid rgb(72, 145, 27)
+  border: 3px solid rgb(72, 145, 27);
 }
-
 </style>
 

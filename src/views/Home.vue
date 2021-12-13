@@ -64,7 +64,7 @@
               :link="cat.nome"
             />
           </div>
-        </div> 
+        </div>
       </div>
     </div>
     <div class="causaDestaque">
@@ -83,27 +83,31 @@
               shadow-lg
             "
           >
-            <div class="col-lg-3 offset-lg-1 p-0 overflow-hidden">
+            <div class="col-lg-3 my-auto offset-lg-1 p-0 overflow-hidden">
               <img
                 class="rounded-circle z-depth-2"
                 width="250"
                 height="250"
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzNuvkdNv0Q7r6tzk9fSXbmLIw1KTOGT_0EQ&usqp=CAU"
+                :src="causaDestaque.logo"
                 data-holder-rendered="true"
               />
             </div>
             <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
-              <h1 class="display-5 fw-bold lh-1">CAUSA EM DESTAQUE</h1>
-              <p class="lead">
-                Lorem ipsum laboriosam quia qui odit in cupiditate recusandae
-                non vero incidunt aut incidunt commodi ea nobis voluptates.
+              <h1 class="display-5 fw-bold lh-1">{{ causaDestaque.nome.toUpperCase() }}</h1>
+              <p class="descDestaque">
+                {{ causaDestaque.descricao }}
               </p>
-              <button
-                type="button"
-                class="btn btn-success btn-lg px-4 me-md-2 fw-bold"
+              <router-link
+                style="text-decoration: none; color: #0b4619"
+                :to="{ name: 'Causa', params: { causa: causaDestaque.nome } }"
               >
-                CONHECER CAUSA
-              </button>
+                <button
+                  type="button"
+                  class="btn btn-success btn-lg px-4 me-md-2 fw-bold"
+                >
+                  CONHECER CAUSA
+                </button>
+              </router-link>
             </div>
           </div>
         </div>
@@ -123,12 +127,11 @@
             :titulo="user.nome"
             :imagem="user.fotoDestaque"
             :texto="user.descricao"
-             :link="user.nome"
+            :link="user.nome"
           />
         </div>
       </div>
     </div>
-
     <div class="rodape">
       <Rodape />
     </div>
@@ -148,6 +151,11 @@ export default {
       sliding: null,
       categorias: [],
       usuarios: [],
+      causaDestaque: {
+        nome: "",
+        logo: "",
+        descricao: "",
+      },
     };
   },
   components: {
@@ -184,20 +192,25 @@ export default {
         });
     },
     CarregaCausaDestaque() {
-      var id = Math.floor(Math.random() * 10);
+      // var id = Math.floor(4* Math.random() + 1);
       axios
-        .get(`http://localhost:8090/usuario/${id}`)
-        .then((response) => {
-          this.usuarios = response.data;
-        })
-        .catch(() => {
-          alert("Algo deu errado ao carregar as causas!");
+        .get(`http://localhost:8090/usuario/8`)
+        .then(
+          function (response) {
+            this.causaDestaque.nome = response.data.nome;
+            this.causaDestaque.logo = response.data.logo;
+            this.causaDestaque.descricao = response.data.descricao;
+          }.bind(this)
+        )
+        .catch(function (error) {
+          console.log(error.statusText);
         });
     },
   },
   mounted() {
     this.ListaCategorias();
     this.ListaUsuarios();
+    this.CarregaCausaDestaque();
   },
   beforeCreate() {},
 };
@@ -269,6 +282,14 @@ export default {
 
 .jumbotron {
   background: #e8e1d9;
+}
+
+.descDestaque {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
 }
 
 .rodape {

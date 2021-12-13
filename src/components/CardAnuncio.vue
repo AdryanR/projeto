@@ -4,7 +4,7 @@
       <div class="card h-100 text-dark mb-3" style="max-width: 15rem">
         <img :src="imagem" class="card-img-top" width="200px" height="190px" />
         <div class="card-body">
-          <h5 class="card-title">{{ titulo }}</h5>
+          <h5 class="card-title">{{ titulo.toUpperCase() }}</h5>
           <p class="card-text">{{ texto }}</p>
         </div>
       </div>

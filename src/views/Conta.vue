@@ -8,7 +8,7 @@
         <div class="container">
           <div class="row">
             <div class="col-md-6">
-              <h3 style="text-align: left">Bem vindo, NomeEntidade</h3>
+              <h3 style="text-align: left">Bem vindo, {{ conta.nome }}</h3>
             </div>
             <div class="col-md-6" style="text-align: right">
               <button class="btn btn-success me-md-2 fw-bold">
@@ -102,16 +102,17 @@
                         type="text"
                         class="form-control"
                         placeholder="Nome entidade"
+                        v-model="conta.nome"
                         required
                       />
                     </div>
                     <div class="col-md-3 py-2">
                       <label class="form-label">CNPJ</label>
-                      <masked-input
-                        v-model="cnpj"
+                      <input
+                        type="text"
                         class="form-control"
-                        mask="11.111.111/1111-11"
-                        placeholder="164.877.910-75 / 22.368.692/0001-68"
+                        placeholder="22.368.692/0001-68"
+                        v-model="conta.cnpj"
                         required
                       />
                     </div>
@@ -121,6 +122,7 @@
                         type="email"
                         class="form-control"
                         placeholder="nome@example.com"
+                        v-model="conta.email"
                         required
                       />
                     </div>
@@ -130,6 +132,7 @@
                         type="password"
                         class="form-control"
                         placeholder="Senha login"
+                        v-model="conta.senha"
                         required
                       />
                     </div>
@@ -141,6 +144,7 @@
                         placeholder="89030-101"
                         maxlength="9"
                         id="cep"
+                        v-model="conta.cep"
                         required
                       />
                     </div>
@@ -151,6 +155,7 @@
                         class="form-control"
                         placeholder="R Engenheiro paul werner"
                         id="logradouro"
+                        v-model="conta.rua"
                         required
                       />
                     </div>
@@ -161,6 +166,7 @@
                         class="form-control"
                         placeholder="638"
                         id="numero"
+                        v-model="conta.rua"
                         required
                       />
                     </div>
@@ -171,6 +177,7 @@
                         class="form-control"
                         placeholder="Itoupava Seca"
                         id="bairro"
+                        v-model="conta.bairro"
                         required
                       />
                     </div>
@@ -181,6 +188,7 @@
                         class="form-control"
                         placeholder="Blumenau"
                         id="cidade"
+                        v-model="conta.cidade"
                         required
                       />
                     </div>
@@ -191,6 +199,7 @@
                         class="form-control"
                         placeholder="Santa Catarina"
                         id="estado"
+                        v-model="conta.estado"
                         required
                       />
                     </div>
@@ -201,6 +210,7 @@
                         class="form-control"
                         placeholder="Torre B, sala 04"
                         id="complemento"
+                        v-model="conta.complemento"
                       />
                     </div>
                     <div class="col-md-3 py-2">
@@ -210,26 +220,27 @@
                         class="form-control"
                         placeholder="Prédio San Pietro"
                         id="referencia"
+                        v-model="conta.referencia"
                       />
                     </div>
                     <div class="col-md-6 py-2">
                       <label class="form-label">Telefone</label>
-                      <masked-input
-                        v-model="phone"
+                      <input
+                        type="text"
                         class="form-control"
-                        mask="(11) 11111-1111"
                         placeholder="(47) 3533-4049"
-                        required
+                        id="referencia"
+                        v-model="conta.telefone"
                       />
                     </div>
                     <div class="col-md-6 py-2">
                       <label class="form-label">WhatsApp</label>
-                      <masked-input
-                        v-model="phone"
+                      <input
+                        type="text"
                         class="form-control"
-                        mask="(11) 11111-1111"
                         placeholder="(47) 98901-9578"
-                        required
+                        id="referencia"
+                        v-model="conta.whatsapp"
                       />
                     </div>
                     <div class="col-12 py-3">
@@ -418,16 +429,19 @@ use a tela CONTROL para selecionar mais de uma."
                         class="fa fa-info-circle"
                       ></i>
                       <select
+                        v-model="conta.categoria"
                         multiple
                         class="form-control"
                         id="exampleFormControlSelect1"
                         required
                       >
-                        <option>COVID-19 (Ex: Álcool em Gel)</option>
-                        <option>Roupas</option>
-                        <option>Alimentos</option>
-                        <option>Higiene</option>
-                        <option>Outros (Ex: Dinheiro)</option>
+                        <option
+                          v-for="categoria in categorias"
+                          v-bind:key="categoria.id"
+                          :value="categoria"
+                        >
+                          {{ categoria.nome }}
+                        </option>
                       </select>
                     </div>
                     <div class="col-12 py-3">
@@ -456,16 +470,146 @@ use a tela CONTROL para selecionar mais de uma."
 <script>
 import Menu from "@/components/Menu.vue";
 import Rodape from "@/components/Rodape.vue";
-import MaskedInput from "vue-masked-input";
+// import MaskedInput from "vue-masked-input";
+import axios from "axios";
 export default {
   data() {
-    return {};
+    return {
+      conta: {
+        nome: "",
+        cnpj: "",
+        email: "",
+        senha: "",
+        cep: "",
+        bairro: "",
+        numero: "",
+        cidade: "",
+        estado: "",
+        complemento: "",
+        referencia: "",
+        logo: "",
+        banner: "",
+        fotoDestaque: "",
+        facebook: "",
+        instagram: "",
+        linkedin: "",
+        telefone: "",
+        whatsapp: "",
+        descricao: "",
+        pedidodesc: "",
+        userfoto: [
+          {
+            foto: "",
+          },
+        ],
+        categoria: [
+          {
+            id: "",
+            nome: "",
+          },
+        ],
+      },
+      idLogado: "",
+      categorias: [],
+    };
   },
+  props: ["idUsuario"],
   components: {
     Menu,
     Rodape,
-    MaskedInput,
+    // MaskedInput,
   },
+  methods: {
+    CarregaInfosByUser() {
+      if (this.idUsuario != null) {
+        axios
+          .get(`http://localhost:8090/usuario/${this.idUsuario}`)
+          .then(
+            function (response) {
+              this.conta.nome = response.data.nome;
+              this.conta.cnpj = response.data.cnpj;
+              this.conta.email = response.data.email;
+              this.conta.senha = response.data.senha;
+              this.conta.facebook = response.data.facebook;
+              this.conta.instagram = response.data.instagram;
+              this.conta.whatsapp = response.data.whatsapp;
+              this.conta.linkedin = response.data.linkedin;
+              this.conta.telefone = response.data.telefone;
+              this.conta.cep = response.data.cep;
+              this.conta.rua = response.data.rua;
+              this.conta.numero = response.data.numero;
+              this.conta.bairro = response.data.bairro;
+              this.conta.cidade = response.data.cidade;
+              this.conta.estado = response.data.estado;
+              this.conta.complemento = response.data.complemento;
+              this.conta.referencia = response.data.referencia;
+              this.conta.banner = response.data.banner;
+              this.conta.logo = response.data.logo;
+              this.conta.fotoDestaque = response.data.fotoDestaque;
+              response.data.userfoto.map((f) =>
+                this.conta.userfoto.push({
+                  foto: f.foto,
+                })
+              );
+              response.data.categoria.map((cat) =>
+                this.conta.categoria.push({
+                  id: cat.id,
+                  nome: cat.nome,
+                })
+              );
+              this.conta.descricao = response.data.descricao;
+              this.conta.pedidodesc = response.data.pedidodesc;
+            }.bind(this)
+          )
+          .catch(function (error) {
+            console.log(error.statusText);
+          });
+      } else {
+        alert("Algo deu errado ao carregar suas informações!");
+      }
+    },
+
+    VerPerfil() {
+      this.$router.replace({
+        name: "Causa",
+        params: {
+          causa: this.conta.nome,
+        },
+      });
+    },
+    consultaCep: function () {
+      if (this.conta.cep.length >= 8) {
+        axios
+          .get(`https://viacep.com.br/ws/${this.conta.cep}/json/`)
+          .then(
+            function (response) {
+              this.conta.rua = response.data.logradouro;
+              this.conta.bairro = response.data.bairro;
+              this.conta.cidade = response.data.localidade;
+              this.conta.estado = response.data.uf;
+              this.conta.complemento = response.data.complemento;
+            }.bind(this)
+          )
+          .catch(function (error) {
+            console.log(error.statusText);
+          });
+      }
+    },
+
+  },
+  mounted() {
+    this.CarregaInfosByUser();
+  },
+  // beforeCreate() {
+  //   axios
+  //     .get(`http://localhost:8090/categoria/allcategoria`)
+  //     .then((response) => {
+  //       this.categorias = response.data;
+  //     })
+  //     .catch(() => {
+  //       alert("Algo deu errado ao carregar as categorias!");
+  //     });
+  // },
 };
 </script>
 

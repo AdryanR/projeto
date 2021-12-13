@@ -5,6 +5,7 @@ import Home from '../views/Home.vue'
 Vue.use(VueRouter)
 
 const routes = [
+  
   {
     path: '/',
     name: 'Home',
@@ -23,7 +24,8 @@ const routes = [
   {
     path: '/conta',
     name: 'Conta',
-    component: () => import('../views/Conta.vue')
+    component: () => import('../views/Conta.vue'),
+    props: true
   },
   {
     path: '/causa/:causa',
