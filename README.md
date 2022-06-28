@@ -1,6 +1,6 @@
 # SITE DOE+ - Site de doações locais
 
-Projeto de site com VUE, o DOE+ é um site para entidades podem se cadastrar e ser encontradas, assim facilitando as doações para entidades locais.
+Projeto de site com VUE, o DOE+ é um site para entidades locais onde podem se cadastrar e serem encontradas, assim facilitando as doações para entidades locais.
 
 ## Stack utilizada
 
