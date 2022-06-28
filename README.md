@@ -4,7 +4,7 @@ Projeto de site com VUE, o DOE+ é um site para entidades locais onde podem se c
 
 ## Stack utilizada
 
-- Vue, JS, HTML, CSS, Bootstrap, Axios
+- Vue, JS, HTML, CSS, Bootstrap, Axios, MySQL
 
 ## Projeto
 Esta aplicação front-end faz parte de um projeto onde trabalhei com mais duas pessoas: [Anderson Bruns](https://github.com/AndersonBruns/) e [Ricardo Filho](https://github.com/ricardo-14).<br>
